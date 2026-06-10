@@ -1,0 +1,32 @@
+<main class="admin-shell">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Admin — Ingest files</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="upload-row">
+        <button mat-flat-button color="primary" type="button" (click)="fileInput.click()">
+          Select files
+        </button>
+        <input #fileInput type="file" multiple (change)="onFiles($event)" hidden />
+      </div>
+
+      @if (filesSrv.files().length > 0) {
+        <div class="file-list">
+          @for(f of filesSrv.files(); track f; let i = $index) {
+          <div class="file-row">
+            <div class="file-details">
+              <div class="file-name">{{ f.name }}</div>
+              <div class="file-meta">{{ f.size }} bytes · {{ f.uploadedAt | slice:0:19 }}</div>
+            </div>
+            <button mat-button color="warn" type="button" (click)="remove(i)">Remove</button>
+          </div>
+          }
+          <button mat-flat-button color="primary" type="submit">Ingest</button>
+        </div>
+      } @else {
+        <div class="empty">No files uploaded.</div>
+      }
+    </mat-card-content>
+  </mat-card>
+</main>

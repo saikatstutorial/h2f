@@ -1,0 +1,20 @@
+<main class="login-shell">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Welcome</mat-card-title>
+      <mat-card-subtitle>Sign in to start chatting.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="login(); $event.preventDefault()" style="margin-top: 10px">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Your name</mat-label>
+          <input matInput [(ngModel)]="username" name="username" required />
+        </mat-form-field>
+        <div class="actions">
+          <button mat-flat-button color="primary" type="submit">Login</button>
+          <button mat-button routerLink="/admin" type="button">Admin</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</main>

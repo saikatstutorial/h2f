@@ -1,0 +1,14 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.toolbar-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

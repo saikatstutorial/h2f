@@ -1,0 +1,55 @@
+<main class="chat-shell">
+  <mat-card class="chat-card">
+    <div class="chat-topbar">
+      <div>
+        <h2>AI Agent</h2>
+        <p>Ask anything. I’ll answer like a helpful assistant.</p>
+      </div>
+    </div>
+
+    <div class="messages-area" #messagesArea>
+      @if (messages().length > 0) {
+      <div class="messages-list">
+        @for(m of messages(); track m) {
+        <div class="message-row" [class.user-message]="m.sender !== 'AI Agent'"
+          [class.ai-message]="m.sender === 'AI Agent'">
+          <div class="message-item">
+            <div class="meta">{{ m.sender }} · {{ m.time }}</div>
+            <div class="text">{{ m.text }}</div>
+          </div>
+        </div>
+        }
+        @if (isReplying) {
+        <div class="message-row ai-message">
+          <div class="message-item typing">
+            <div class="meta">AI Agent · typing...</div>
+            <div class="text">Thinking of the best response...</div>
+          </div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="empty">
+        <h3>Hello there 👋</h3>
+        <p>
+          This is your smart AI agent chat. Send a prompt to get a crisp answer, a playful suggestion,
+          or a useful summary.
+        </p>
+        <p class="tip">Try: “Give me a creative startup name for a sustainable travel app.”</p>
+      </div>
+      }
+    </div>
+
+    <mat-card-actions>
+      <form class="composer" (submit)="send(); $event.preventDefault()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Type your message</mat-label>
+          <input matInput [(ngModel)]="draft" name="draft" />
+          <button matIconButton matSuffix (click)="send()">
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </mat-card-actions>
+  </mat-card>
+</main>
